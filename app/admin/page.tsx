@@ -238,16 +238,10 @@ function AdminEditor({ data }: { data: SiteData }) {
               <div className="flex items-center gap-4">
                 <label className="flex cursor-pointer items-center gap-2 font-display text-xs font-bold uppercase tracking-[0.15em] text-white/60">
                   <input
-                    type="radio"
-                    name="active-challenge"
+                    type="checkbox"
                     checked={ch.active}
-                    onChange={() =>
-                      setChallenges((prev) =>
-                        prev.map((c) => ({
-                          ...c,
-                          active: c.id === ch.id,
-                        })),
-                      )
+                    onChange={(e) =>
+                      updateChallenge(ch.id, { active: e.target.checked })
                     }
                     className="h-4 w-4 accent-green"
                   />

@@ -15,7 +15,7 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-  title: "Ege'nin Challenge'ları | FC27 Yayın Takip",
+  title: "Ege'nin Challengeları | FC27 Yayın Takip",
   description:
     "FC27 subathon yayını için canlı challenge ve konuk takip sistemi.",
   applicationName: "FC27 Yayın Takip",

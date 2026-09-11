@@ -60,7 +60,7 @@ export default function HomePage() {
           </div>
           <h1 className="font-display text-4xl font-bold uppercase leading-none tracking-[0.1em] text-white sm:text-6xl">
             Ege&apos;nin{" "}
-            <span className="text-green">Challenge&apos;ları</span>
+            <span className="text-green">Challengeları</span>
           </h1>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <span className="h-[3px] w-14 bg-green" />
@@ -88,7 +88,7 @@ export default function HomePage() {
           <div className="mb-3">
             <SectionHeader
               kicker="Main Challenge"
-              title="Ege'nin Challenge'ları"
+              title="Ege'nin Challengeları"
               right={
                 <span className="hidden font-display text-xs font-bold uppercase tracking-[0.25em] text-white/40 sm:block">
                   8 Challenge
