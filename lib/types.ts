@@ -11,10 +11,6 @@ export type Challenge = {
 export type Guest = {
   id: string;
   name: string;
-  host: string;
-  approved: boolean;
-  coming: boolean;
-  date: string;
 };
 
 export type SiteData = {

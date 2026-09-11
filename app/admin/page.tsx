@@ -160,10 +160,6 @@ function AdminEditor({ data }: { data: SiteData }) {
             ? crypto.randomUUID()
             : `guest-${Date.now()}`,
         name: "",
-        host: "",
-        approved: false,
-        coming: false,
-        date: "",
       },
     ]);
   }
@@ -273,46 +269,12 @@ function AdminEditor({ data }: { data: SiteData }) {
           {guests.map((g) => (
             <div
               key={g.id}
-              className="grid grid-cols-1 gap-3 border-b border-line-soft px-4 py-3 last:border-b-0 sm:grid-cols-[1fr_1fr_auto_auto_1fr_auto] sm:items-center sm:px-6"
+              className="grid grid-cols-1 gap-3 border-b border-line-soft px-4 py-3 last:border-b-0 sm:grid-cols-[1fr_auto] sm:items-center sm:px-6"
             >
               <input
                 value={g.name}
                 onChange={(e) => updateGuest(g.id, { name: e.target.value })}
                 placeholder="Konuk adı"
-                className="border border-line bg-navy-800 px-3 py-2 font-body text-sm text-white outline-none placeholder:text-white/30 focus:border-green"
-              />
-              <input
-                value={g.host}
-                onChange={(e) => updateGuest(g.id, { host: e.target.value })}
-                placeholder="Kişi (getiren)"
-                className="border border-line bg-navy-800 px-3 py-2 font-body text-sm text-white outline-none placeholder:text-white/30 focus:border-green"
-              />
-              <label className="flex cursor-pointer items-center gap-2 font-display text-xs font-bold uppercase tracking-[0.15em] text-white/60">
-                <input
-                  type="checkbox"
-                  checked={g.approved}
-                  onChange={(e) =>
-                    updateGuest(g.id, { approved: e.target.checked })
-                  }
-                  className="h-4 w-4 accent-green"
-                />
-                Ege Onay
-              </label>
-              <label className="flex cursor-pointer items-center gap-2 font-display text-xs font-bold uppercase tracking-[0.15em] text-white/60">
-                <input
-                  type="checkbox"
-                  checked={g.coming}
-                  onChange={(e) =>
-                    updateGuest(g.id, { coming: e.target.checked })
-                  }
-                  className="h-4 w-4 accent-green"
-                />
-                Geliyor
-              </label>
-              <input
-                value={g.date}
-                onChange={(e) => updateGuest(g.id, { date: e.target.value })}
-                placeholder="Tarih"
                 className="border border-line bg-navy-800 px-3 py-2 font-body text-sm text-white outline-none placeholder:text-white/30 focus:border-green"
               />
               <button

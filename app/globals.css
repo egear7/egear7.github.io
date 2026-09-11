@@ -38,22 +38,6 @@ body {
   color: #050d22;
 }
 
-@keyframes pulse-dot {
-  0%,
-  100% {
-    opacity: 1;
-    box-shadow: 0 0 0 0 rgba(255, 23, 68, 0.6);
-  }
-  50% {
-    opacity: 0.6;
-    box-shadow: 0 0 0 6px rgba(255, 23, 68, 0);
-  }
-}
-
-.pulse-dot {
-  animation: pulse-dot 1.6s ease-in-out infinite;
-}
-
 @keyframes glow-active {
   0%,
   100% {

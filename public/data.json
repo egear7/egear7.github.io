@@ -60,11 +60,7 @@
   "guests": [
     {
       "id": "guest-1",
-      "name": "",
-      "host": "",
-      "approved": false,
-      "coming": false,
-      "date": ""
+      "name": ""
     }
   ],
   "updatedAt": "2026-09-11T00:00:00.000Z"

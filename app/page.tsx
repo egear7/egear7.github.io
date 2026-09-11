@@ -42,22 +42,16 @@ function CornerAccents() {
 }
 
 export default function HomePage() {
-  const { data, loading, error, isLive } = useSiteData();
+  const { data, loading, error } = useSiteData();
 
   return (
     <main className="flex-1">
       <section className="relative border-b border-line bg-navy-900">
         <CornerAccents />
         <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 pb-5 pt-6 sm:px-6">
-          <div className="flex items-center justify-between gap-4">
-            <p className="font-display text-xs font-bold uppercase tracking-[0.35em] text-white/50">
-              FC27 Subathon • Yayın Takip
-            </p>
-            <span className="inline-flex items-center gap-2 font-display text-xs font-bold uppercase tracking-[0.25em] text-red">
-              <span className="pulse-dot h-2 w-2 rounded-full bg-red" />
-              {isLive ? "Canlı" : "Bağlantı Yok"}
-            </span>
-          </div>
+          <p className="font-display text-xs font-bold uppercase tracking-[0.35em] text-white/50">
+            FC27 Subathon • Yayın Takip
+          </p>
           <h1 className="font-display text-4xl font-bold uppercase leading-none tracking-[0.1em] text-white sm:text-6xl">
             Ege&apos;nin{" "}
             <span className="text-green">Challengeları</span>
@@ -114,7 +108,7 @@ export default function HomePage() {
               accent="gold"
               right={
                 <span className="hidden font-display text-xs font-bold uppercase tracking-[0.25em] text-white/40 sm:block">
-                  {data.guests.filter((g) => g.coming).length}/{data.guests.length} Onaylı
+                  {data.guests.length} Konuk
                 </span>
               }
             />
