@@ -1,0 +1,71 @@
+{
+  "challenges": [
+    {
+      "id": "goals-per-match",
+      "title": "Bir Maçta En Fazla Gol Atma",
+      "milestones": "10 / 15 / 20",
+      "status": "in-progress",
+      "active": true
+    },
+    {
+      "id": "goals-same-player",
+      "title": "Aynı Oyuncuyla En Fazla Gol Atma (Yayın Boyunca)",
+      "milestones": "100 / 200 / 300",
+      "status": "in-progress",
+      "active": false
+    },
+    {
+      "id": "win-streak",
+      "title": "En Fazla Win Streak",
+      "milestones": "5 / 10 / 20",
+      "status": "in-progress",
+      "active": false
+    },
+    {
+      "id": "set-piece-goals",
+      "title": "Duran Toptan En Fazla Gol Atma",
+      "milestones": "5 / 10 / 15",
+      "status": "in-progress",
+      "active": false
+    },
+    {
+      "id": "clean-sheet-streak",
+      "title": "En Fazla Clean Sheet Streak",
+      "milestones": "5 / 10 / 20",
+      "status": "in-progress",
+      "active": false
+    },
+    {
+      "id": "keeper-goal",
+      "title": "Kaleciyle Gol Atma",
+      "milestones": "",
+      "status": "in-progress",
+      "active": false
+    },
+    {
+      "id": "pack-luck",
+      "title": "Paketten Değer Çıkarma",
+      "milestones": "100K / 500K / 1M",
+      "status": "in-progress",
+      "active": false
+    },
+    {
+      "id": "ladder-top-256",
+      "title": "Ladder'da Top 256",
+      "milestones": "",
+      "status": "in-progress",
+      "active": false
+    }
+  ],
+  "guests": [
+    {
+      "id": "guest-1",
+      "name": "",
+      "host": "",
+      "approved": false,
+      "coming": false,
+      "date": ""
+    }
+  ],
+  "updatedAt": "2026-09-11T00:00:00.000Z"
+}

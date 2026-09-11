@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FC27 Yayın Takip Sitesi
 
-## Getting Started
+Ege'nin subathon yayını için canlı challenge ve konuk takip sitesi.
+Next.js (App Router) + Tailwind CSS ile statik export olarak GitHub Pages'e yayınlanır.
 
-First, run the development server:
+## Özellikler
+
+- **Main Challenge tablosu** — 8 challenge, durum göstergeleri (Tamamlandı / Devam Ediyor / Başarısız), aktif challenge vurgusu
+- **Konuk listesi** — Ege Onay ve Gelir/Gelmez kutuları, mobilde yatay kaydırma
+- **Admin paneli** (`/admin`) — şifre korumalı, değişiklikleri GitHub API ile `public/data.json`'a commit eder
+- **Canlı güncelleme** — site veriyi jsDelivr CDN üzerinden 30 saniyede bir çeker; commit sonrası izleyiciler ~1 dakika içinde güncel veriyi görür
+
+## Kurulum
+
+1. **Repo oluşturun**: GitHub'da `<kullanıcıadı>.github.io` adında **public** bir repo açın (GitHub Pages user site kuralı). Repo adı tam olarak kullanıcı adınız olmalı.
+2. Bu projeyi repoya push edin.
+3. **Pages ayarı**: Repo → Settings → Pages → Source: **GitHub Actions** seçin.
+4. Deploy workflow'u otomatik çalışır; site `https://<kullanıcıadı>.github.io/` adresinde açılır.
+
+### Şifre (Admin Paneli)
+
+Varsayılan şifre: `ege2026` (değiştirmeniz **şart**).
+
+Değiştirmek için:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+echo -n "YENI_SIFRENIZ" | shasum -a 256 | cut -d' ' -f1
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Çıkan hash'i şuraya yazın:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# .env.local (yerel build) için
+NEXT_PUBLIC_ADMIN_PASSWORD_HASH=<hash>
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Ve GitHub'da Repo → Settings → Secrets and variables → Actions → **New repository secret**:
+`NEXT_PUBLIC_ADMIN_PASSWORD_HASH` = `<hash>` (deploy sırasında kullanılır).
 
-## Learn More
+> Not: Bu şifre istemci tarafında kontrol edilir — yalnızca görsel bir engeldir, gerçek güvenlik değildir. Gerçek veri koruması, admin işlemlerinin GitHub token ile commit edilmesidir.
 
-To learn more about Next.js, take a look at the following resources:
+### GitHub Token (Admin Panelinde)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Admin panelinde değişiklik yapabilmek için GitHub'a **fine-grained PAT** gerekir:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. GitHub → Settings → Developer settings → **Fine-grained tokens** → Generate new token
+2. **Repository access**: Only select repositories → `<kullanıcıadı>.github.io`
+3. **Permissions** → Repository permissions → **Contents: Read and write**
+4. Token'ı kopyalayın (bir daha gösterilmez)
 
-## Deploy on Vercel
+Token, admin panelinde ilk oturumda girilir ve yalnızca `sessionStorage`'da tutulur —
+koda, git geçmişine veya ortam değişkenlerine **asla** yazılmaz. Çıkış yapınca silinir.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Veri Akışı
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+Admin paneli ──PUT──▶ api.github.com ──commit──▶ public/data.json (repo main)
+                                                        │
+                                                        ▼ (CDN)
+Ana site ──jsDelivr (30 sn poll)──▶ güncel veri
+```
+
+Admin commit'i GitHub Pages'e otomatik deploy tetiklemez (workflow yalnızca koda
+bağlı), ancak site veriyi CDN'den çektiği için rebuild'e gerek yoktur.
+
+## Yerel Geliştirme
+
+```bash
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # statik çıktı → ./out
+npx serve out      # çıktıyı test et
+```
+
+## Proje Yapısı
+
+```
+app/page.tsx        # Ana site (challenge + konuk tablosu)
+app/admin/page.tsx  # Admin paneli (şifre + token + commit)
+components/         # UI bileşenleri
+lib/github.ts       # GitHub contents API istemcisi
+lib/useSiteData.ts  # Canlı veri hook'u (CDN + poll)
+lib/site.ts         # Repo/site konfigürasyonu
+public/data.json    # Tüm site verisi (commit edilen dosya)
+```
