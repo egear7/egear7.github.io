@@ -95,17 +95,14 @@ function AdminEditor({ data }: { data: SiteData }) {
     const t = token.trim();
     if (!t) return;
     setTokenStatus("testing");
-    const ok = await validateToken(t);
-    if (ok) {
+    const result = await validateToken(t);
+    if (result.ok) {
       tokenStore.set(t);
       setTokenStatus("ok");
-      setMessage({ kind: "ok", text: "Token doğrulandı, commit yapılabilir." });
+      setMessage({ kind: "ok", text: result.message });
     } else {
       setTokenStatus("fail");
-      setMessage({
-        kind: "err",
-        text: "Token doğrulanamadı. Repo adı ve token yetkilerini kontrol edin.",
-      });
+      setMessage({ kind: "err", text: result.message });
     }
   }
 

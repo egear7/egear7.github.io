@@ -89,10 +89,15 @@ export async function saveDataJson(
   }
 }
 
-export async function validateToken(token: string): Promise<boolean> {
+export type TokenValidation = {
+  ok: boolean;
+  message: string;
+};
+
+export async function validateToken(token: string): Promise<TokenValidation> {
   const repo = getRepoName();
   try {
-    const res = await fetch(`${API}/repos/${repo}`, {
+    const userRes = await fetch(`${API}/user`, {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/vnd.github+json",
@@ -100,9 +105,51 @@ export async function validateToken(token: string): Promise<boolean> {
       },
       cache: "no-store",
     });
-    return res.ok;
-  } catch {
-    return false;
+    if (userRes.status === 401) {
+      return {
+        ok: false,
+        message:
+          "Token geçersiz (401). Token'ı eksiksiz kopyaladığınızdan ve github_pat_ ile başladığından emin olun.",
+      };
+    }
+    if (!userRes.ok) {
+      return {
+        ok: false,
+        message: await apiErrorMessage(userRes, "Kullanıcı doğrulanamadı"),
+      };
+    }
+
+    const repoRes = await fetch(`${API}/repos/${repo}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+      cache: "no-store",
+    });
+    if (repoRes.status === 404) {
+      return {
+        ok: false,
+        message:
+          "Token bu repoya erişime sahip değil (404). Fine-grained token ayarlarında 'Repository access' altında egear7.github.io seçili olduğundan emin olun.",
+      };
+    }
+    if (!repoRes.ok) {
+      return {
+        ok: false,
+        message: await apiErrorMessage(repoRes, "Repo erişimi kontrol edilemedi"),
+      };
+    }
+
+    return { ok: true, message: "Token doğrulandı, commit yapılabilir." };
+  } catch (err) {
+    return {
+      ok: false,
+      message:
+        err instanceof Error
+          ? err.message
+          : "Ağ hatası — bağlantınızı kontrol edin.",
+    };
   }
 }
 
