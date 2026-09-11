@@ -12,42 +12,42 @@
       "title": "Aynı Oyuncuyla En Fazla Gol Atma (Yayın Boyunca)",
       "milestones": "100 / 200 / 300",
       "status": "in-progress",
-      "active": false
+      "active": true
     },
     {
       "id": "win-streak",
       "title": "En Fazla Win Streak",
       "milestones": "5 / 10 / 20",
       "status": "in-progress",
-      "active": false
+      "active": true
     },
     {
       "id": "set-piece-goals",
       "title": "Duran Toptan En Fazla Gol Atma",
       "milestones": "5 / 10 / 15",
       "status": "in-progress",
-      "active": false
+      "active": true
     },
     {
       "id": "clean-sheet-streak",
       "title": "En Fazla Clean Sheet Streak",
       "milestones": "5 / 10 / 20",
       "status": "in-progress",
-      "active": false
+      "active": true
     },
     {
       "id": "keeper-goal",
       "title": "Kaleciyle Gol Atma",
       "milestones": "",
       "status": "in-progress",
-      "active": false
+      "active": true
     },
     {
       "id": "pack-luck",
       "title": "Paketten Değer Çıkarma",
       "milestones": "100K / 500K / 1M",
       "status": "in-progress",
-      "active": false
+      "active": true
     },
     {
       "id": "ladder-top-256",
@@ -60,8 +60,12 @@
   "guests": [
     {
       "id": "guest-1",
-      "name": ""
+      "name": "",
+      "host": "",
+      "approved": false,
+      "coming": false,
+      "date": ""
     }
   ],
-  "updatedAt": "2026-09-11T00:00:00.000Z"
+  "updatedAt": "2026-09-11T19:01:34.495Z"
 }
