@@ -1,4 +1,4 @@
-import { DATA_PATH, getRepoName } from "./site";
+import { DATA_PATH, getRepoName, getRepoOwner } from "./site";
 import type { SaveResult, SiteData } from "./types";
 
 const API = "https://api.github.com";
@@ -29,9 +29,10 @@ export async function fetchDataJson(): Promise<SiteData | null> {
 }
 
 export async function fetchLatestFileSha(token: string): Promise<string> {
+  const owner = getRepoOwner();
   const repo = getRepoName();
   const res = await fetch(
-    `${API}/repos/${repo}/contents/${DATA_PATH}`,
+    `${API}/repos/${owner}/${repo}/contents/${DATA_PATH}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -52,11 +53,14 @@ export async function saveDataJson(
   token: string,
   data: SiteData,
 ): Promise<SaveResult> {
+  const owner = getRepoOwner();
   const repo = getRepoName();
   try {
     const sha = await fetchLatestFileSha(token);
     const content = utf8ToBase64(JSON.stringify(data, null, 2));
-    const res = await fetch(`${API}/repos/${repo}/contents/${DATA_PATH}`, {
+    const res = await fetch(
+      `${API}/repos/${owner}/${repo}/contents/${DATA_PATH}`,
+      {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -95,6 +99,7 @@ export type TokenValidation = {
 };
 
 export async function validateToken(token: string): Promise<TokenValidation> {
+  const owner = getRepoOwner();
   const repo = getRepoName();
   try {
     const userRes = await fetch(`${API}/user`, {
@@ -119,7 +124,7 @@ export async function validateToken(token: string): Promise<TokenValidation> {
       };
     }
 
-    const repoRes = await fetch(`${API}/repos/${repo}`, {
+    const repoRes = await fetch(`${API}/repos/${owner}/${repo}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/vnd.github+json",
@@ -164,7 +169,8 @@ async function apiErrorMessage(res: Response, fallback: string): Promise<string>
       return "Token geçersiz veya yetkisiz (401). Token'ı kontrol edin.";
     if (res.status === 403)
       return `${base} — Rate limit veya izin sorunu. Token'ın bu repoda "Contents: Read and write" yetkisi olduğundan emin olun.`;
-    if (res.status === 404) return `${base} (404) — Repo adını kontrol edin.`;
+    if (res.status === 404)
+      return `${base} (404) — Token'ın bu repoya erişimi olmayabilir veya repo adı hatalı. Fine-grained token'da 'Repository access' altında repoyu seçtiğinizden emin olun.`;
     return `${base} (${res.status})`;
   } catch {
     return `${fallback} (${res.status})`;
