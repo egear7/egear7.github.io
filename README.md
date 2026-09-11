@@ -21,21 +21,12 @@ Next.js (App Router) + Tailwind CSS ile statik export olarak GitHub Pages'e yay�
 
 Varsayılan şifre: `kilim7mert` (değiştirmeniz **şart**).
 
-Değiştirmek için:
+Değiştirmek için GitHub'da Repo → Settings → Secrets and variables → Actions → **New repository secret**:
+`NEXT_PUBLIC_ADMIN_PASSWORD_HASH` değerine ya istediğiniz şifreyi **düz metin** olarak ya da hash'ini yazabilirsiniz:
 
 ```bash
-echo -n "YENI_SIFRENIZ" | shasum -a 256 | cut -d' ' -f1
+echo -n "YENI_SIFREN" | shasum -a 256 | cut -d' ' -f1
 ```
-
-Çıkan hash'i şuraya yazın:
-
-```bash
-# .env.local (yerel build) için
-NEXT_PUBLIC_ADMIN_PASSWORD_HASH=<hash>
-```
-
-Ve GitHub'da Repo → Settings → Secrets and variables → Actions → **New repository secret**:
-`NEXT_PUBLIC_ADMIN_PASSWORD_HASH` = `<hash>` (deploy sırasında kullanılır).
 
 > Not: Bu şifre istemci tarafında kontrol edilir — yalnızca görsel bir engeldir, gerçek güvenlik değildir. Gerçek veri koruması, admin işlemlerinin GitHub token ile commit edilmesidir.
 

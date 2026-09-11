@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
 import { saveDataJson, validateToken } from "@/lib/github";
-import { ADMIN_PASSWORD_HASH, sha256Hex } from "@/lib/site";
+import { verifyAdminPassword } from "@/lib/site";
 import { useSiteData } from "@/lib/useSiteData";
 import type {
   Challenge,
@@ -387,8 +387,8 @@ export default function AdminPage() {
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    const hash = await sha256Hex(password);
-    if (hash === ADMIN_PASSWORD_HASH) {
+    const ok = await verifyAdminPassword(password);
+    if (ok) {
       authStore.set("1");
       setAuthError(null);
     } else {

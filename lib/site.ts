@@ -33,9 +33,21 @@ export async function sha256Hex(input: string): Promise<string> {
     .join("");
 }
 
-export const ADMIN_PASSWORD_HASH =
-  process.env.NEXT_PUBLIC_ADMIN_PASSWORD_HASH ||
+const PASSWORD_SECRET =
+  process.env.NEXT_PUBLIC_ADMIN_PASSWORD_HASH ?? "";
+
+export const DEFAULT_PASSWORD_HASH =
   "0bf4d633541cc621888519d27cb90e9231a0c860bcbf27eb278cf37e8181c732";
+
+export async function verifyAdminPassword(input: string): Promise<boolean> {
+  if (!PASSWORD_SECRET) {
+    return (await sha256Hex(input)) === DEFAULT_PASSWORD_HASH;
+  }
+  if (/^[0-9a-f]{64}$/i.test(PASSWORD_SECRET)) {
+    return (await sha256Hex(input)) === PASSWORD_SECRET;
+  }
+  return input === PASSWORD_SECRET;
+}
 
 export function isBrowser(): boolean {
   return typeof window !== "undefined";
