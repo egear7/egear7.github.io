@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { ChallengeBoard } from "@/components/ChallengeBoard";
 import { GuestTable } from "@/components/GuestTable";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -133,12 +132,9 @@ export default function HomePage() {
           <p className="font-display text-xs font-bold uppercase tracking-[0.3em] text-white/40">
             FC27 Subathon • Ege Yayın Takip
           </p>
-          <Link
-            href="/admin/"
-            className="border border-line px-3 py-1.5 font-display text-xs font-bold uppercase tracking-[0.25em] text-white/50 transition-colors hover:border-green hover:text-green"
-          >
-            Admin Paneli
-          </Link>
+          <p className="font-display text-xs font-semibold uppercase tracking-[0.25em] text-white/25">
+            © {new Date().getFullYear()}
+          </p>
         </footer>
       </div>
     </main>

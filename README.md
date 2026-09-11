@@ -19,16 +19,19 @@ Next.js (App Router) + Tailwind CSS ile statik export olarak GitHub Pages'e yay�
 
 ### Şifre (Admin Paneli)
 
-Varsayılan şifre: `kilim7mert` (değiştirmeniz **şart**).
+Admin paneli şifresi **koda gömülü değildir**. Şifre, GitHub Actions secret'ı olarak tanımlanır:
 
-Değiştirmek için GitHub'da Repo → Settings → Secrets and variables → Actions → **New repository secret**:
-`NEXT_PUBLIC_ADMIN_PASSWORD_HASH` değerine ya istediğiniz şifreyi **düz metin** olarak ya da hash'ini yazabilirsiniz:
+Repo → Settings → Secrets and variables → Actions → **New repository secret**:
+`NEXT_PUBLIC_ADMIN_PASSWORD_HASH` değerine ya istediğiniz şifreyi **düz metin** olarak ya da SHA-256 hash'ini yazabilirsiniz:
 
 ```bash
-echo -n "YENI_SIFREN" | shasum -a 256 | cut -d' ' -f1
+echo -n "SIFRENIZ" | shasum -a 256 | cut -d' ' -f1
 ```
 
-> Not: Bu şifre istemci tarafında kontrol edilir — yalnızca görsel bir engeldir, gerçek güvenlik değildir. Gerçek veri koruması, admin işlemlerinin GitHub token ile commit edilmesidir.
+> Secret tanımlanmazsa admin paneli **kilitlidir** (hiçbir şifre kabul edilmez).
+> Değişiklikten sonra workflow'un yeniden çalışması için bir push yapın.
+
+> Not: Şifre istemci tarafında kontrol edilir — yalnızca görsel bir engeldir, gerçek güvenlik değildir. Gerçek veri koruması, admin işlemlerinin GitHub token ile commit edilmesidir.
 
 ### GitHub Token (Admin Panelinde)
 
