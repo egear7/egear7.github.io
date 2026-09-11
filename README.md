@@ -19,7 +19,7 @@ Next.js (App Router) + Tailwind CSS ile statik export olarak GitHub Pages'e yay�
 
 ### Şifre (Admin Paneli)
 
-Varsayılan şifre: `ege2026` (değiştirmeniz **şart**).
+Varsayılan şifre: `kilim7mert` (değiştirmeniz **şart**).
 
 Değiştirmek için:
 

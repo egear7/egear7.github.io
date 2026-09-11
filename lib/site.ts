@@ -35,7 +35,7 @@ export async function sha256Hex(input: string): Promise<string> {
 
 export const ADMIN_PASSWORD_HASH =
   process.env.NEXT_PUBLIC_ADMIN_PASSWORD_HASH ??
-  "e88f74ecca4f098be31448a58dda385945eb2e09bdc1ae84933615bb9e3d21d8";
+  "0bf4d633541cc621888519d27cb90e9231a0c860bcbf27eb278cf37e8181c732";
 
 export function isBrowser(): boolean {
   return typeof window !== "undefined";
