@@ -5,10 +5,17 @@ import { useState, useSyncExternalStore } from "react";
 import { saveDataJson, validateToken } from "@/lib/github";
 import { verifyAdminPassword } from "@/lib/site";
 import { useSiteData } from "@/lib/useSiteData";
+import {
+  MILESTONE_STATE_LABELS,
+  MILESTONE_STATES,
+  normalizeMilestoneStates,
+  parseMilestones,
+} from "@/lib/challenges";
 import type {
   Challenge,
   ChallengeStatus,
   Guest,
+  MilestoneState,
   SiteData,
 } from "@/lib/types";
 
@@ -119,7 +126,10 @@ function AdminEditor({ data }: { data: SiteData }) {
     setMessage(null);
     setCommitUrl(null);
     const payload: SiteData = {
-      challenges,
+      challenges: challenges.map((c) => {
+        const states = normalizeMilestoneStates(c);
+        return states.length > 0 ? { ...c, milestoneStates: states } : c;
+      }),
       guests,
       updatedAt: new Date().toISOString(),
     };
@@ -139,6 +149,21 @@ function AdminEditor({ data }: { data: SiteData }) {
   function updateChallenge(id: string, patch: Partial<Challenge>) {
     setChallenges((prev) =>
       prev.map((c) => (c.id === id ? { ...c, ...patch } : c)),
+    );
+  }
+
+  function setMilestoneState(
+    id: string,
+    index: number,
+    state: MilestoneState,
+  ) {
+    setChallenges((prev) =>
+      prev.map((c) => {
+        if (c.id !== id) return c;
+        const states = normalizeMilestoneStates(c);
+        states[index] = state;
+        return { ...c, milestoneStates: states };
+      }),
     );
   }
 
@@ -222,10 +247,57 @@ function AdminEditor({ data }: { data: SiteData }) {
                 <p className="font-display text-base font-bold uppercase tracking-[0.08em] text-white">
                   {ch.title}
                 </p>
-                {ch.milestones ? (
-                  <p className="font-display text-xs font-semibold tracking-[0.15em] text-gold">
-                    HEDEF: {ch.milestones}
-                  </p>
+                {parseMilestones(ch.milestones).length > 0 ? (
+                  <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                    <span className="font-display text-xs font-semibold tracking-[0.15em] text-white/40">
+                      HEDEF:
+                    </span>
+                    {parseMilestones(ch.milestones).map((value, i) => {
+                      const state =
+                        normalizeMilestoneStates(ch)[i] ?? "pending";
+                      return (
+                        <div
+                          key={`${value}-${i}`}
+                          className="flex items-center gap-1.5"
+                        >
+                          <span className="font-display text-xs font-bold tracking-[0.15em] text-white/60">
+                            {value}
+                          </span>
+                          <div className="flex">
+                            {MILESTONE_STATES.map((s) => {
+                              const selected = s === state;
+                              const filled =
+                                s === "completed"
+                                  ? "border-green bg-green"
+                                  : s === "in-progress"
+                                    ? "border-gold bg-gold"
+                                    : "border-gray-400 bg-gray-400";
+                              const outline =
+                                s === "completed"
+                                  ? "border-green/40 bg-transparent"
+                                  : s === "in-progress"
+                                    ? "border-gold/40 bg-transparent"
+                                    : "border-white/20 bg-transparent";
+                              return (
+                                <button
+                                  key={s}
+                                  type="button"
+                                  title={`${value}: ${MILESTONE_STATE_LABELS[s]}`}
+                                  aria-label={`${value}: ${MILESTONE_STATE_LABELS[s]}`}
+                                  onClick={() =>
+                                    setMilestoneState(ch.id, i, s)
+                                  }
+                                  className={`h-5 w-5 border ${
+                                    selected ? filled : outline
+                                  }`}
+                                />
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 ) : null}
               </div>
               <div className="flex items-center gap-4">

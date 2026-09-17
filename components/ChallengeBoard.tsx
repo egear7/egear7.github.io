@@ -1,6 +1,25 @@
 import { SquareCheckbox } from "./SquareCheckbox";
 import { StatusBadge } from "./StatusBadge";
-import type { Challenge } from "@/lib/types";
+import { normalizeMilestoneStates, parseMilestones } from "@/lib/challenges";
+import type { Challenge, MilestoneState } from "@/lib/types";
+
+const MILESTONE_CHIP_CLASS: Record<
+  MilestoneState,
+  { chip: string; label: string }
+> = {
+  completed: {
+    chip: "border-green/60 bg-green-dim text-green",
+    label: "Tamamlandı",
+  },
+  "in-progress": {
+    chip: "border-gold/60 bg-gold-dim text-gold",
+    label: "Devam Ediyor",
+  },
+  pending: {
+    chip: "border-white/15 bg-white/5 text-white/40",
+    label: "Başlanmadı",
+  },
+};
 
 export function ChallengeBoard({ challenges }: { challenges: Challenge[] }) {
   return (
@@ -30,8 +49,21 @@ export function ChallengeBoard({ challenges }: { challenges: Challenge[] }) {
               {ch.title}
             </h3>
             {ch.milestones ? (
-              <p className="mt-0.5 font-display text-sm font-semibold tracking-[0.15em] text-gold">
-                HEDEF: {ch.milestones}
+              <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 font-display text-sm font-semibold tracking-[0.15em]">
+                <span className="text-white/50">HEDEF:</span>
+                {parseMilestones(ch.milestones).map((value, i) => {
+                  const state = normalizeMilestoneStates(ch)[i] ?? "pending";
+                  const s = MILESTONE_CHIP_CLASS[state];
+                  return (
+                    <span
+                      key={`${value}-${i}`}
+                      title={s.label}
+                      className={`border px-2 py-0.5 ${s.chip}`}
+                    >
+                      {value}
+                    </span>
+                  );
+                })}
               </p>
             ) : (
               <p className="mt-0.5 font-display text-xs font-semibold uppercase tracking-[0.3em] text-white/40">
