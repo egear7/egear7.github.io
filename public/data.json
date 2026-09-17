@@ -53,9 +53,38 @@
       "title": "Ladder'da Top 256",
       "milestones": "",
       "status": "in-progress",
-      "active": true
+      "active": false
     }
   ],
-  "guests": [],
-  "updatedAt": "2026-09-17T19:24:28.930Z"
+  "guests": [
+    {
+      "id": "1358c961-12af-4335-b230-31ef15d46890",
+      "name": "Şinasi"
+    },
+    {
+      "id": "26229606-1e2b-46d5-b5d8-f621db5e7dc2",
+      "name": "Hype"
+    },
+    {
+      "id": "ed0cae23-3088-4105-ab45-a367483ea354",
+      "name": "Nuriben"
+    },
+    {
+      "id": "dc8f11db-49ca-4c81-997c-68f7950f4733",
+      "name": "Triel"
+    },
+    {
+      "id": "59910930-986c-4ba9-992c-2e1473d79118",
+      "name": "Hasan"
+    },
+    {
+      "id": "def8670d-10c2-4ea0-a34f-9d8acb6760f8",
+      "name": "Prensesperver"
+    },
+    {
+      "id": "cb77f0b0-d5ca-4f6b-998c-c25c98864609",
+      "name": ""
+    }
+  ],
+  "updatedAt": "2026-09-17T19:36:27.528Z"
 }
