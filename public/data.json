@@ -7,7 +7,7 @@
       "status": "in-progress",
       "active": true,
       "milestoneStates": [
-        "in-progress",
+        "pending",
         "pending",
         "pending"
       ]
@@ -57,5 +57,5 @@
     }
   ],
   "guests": [],
-  "updatedAt": "2026-09-17T19:13:43.072Z"
+  "updatedAt": "2026-09-17T19:22:21.146Z"
 }
