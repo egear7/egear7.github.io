@@ -22,8 +22,8 @@ export function useSiteData() {
   const fetchAll = useCallback(async (): Promise<SiteData | null> => {
     const t = Date.now();
     const urls = [
-      `${getDataUrl()}?t=${t}`,
       `${getRawDataUrl()}?t=${t}`,
+      `${getDataUrl()}?t=${t}`,
       `/data.json?t=${t}`,
     ];
     for (const url of urls) {

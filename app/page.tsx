@@ -85,7 +85,7 @@ export default function HomePage() {
               title="Ege'nin Challengeları"
               right={
                 <span className="hidden font-display text-xs font-bold uppercase tracking-[0.25em] text-white/40 sm:block">
-                  8 Challenge
+                  {data.challenges.length} Challenge
                 </span>
               }
             />

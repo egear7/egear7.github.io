@@ -1,13 +1,6 @@
 {
   "challenges": [
     {
-      "id": "goals-per-match",
-      "title": "Bir Maçta En Fazla Gol Atma",
-      "milestones": "10 / 15 / 20",
-      "status": "in-progress",
-      "active": true
-    },
-    {
       "id": "goals-same-player",
       "title": "Aynı Oyuncuyla En Fazla Gol Atma (Yayın Boyunca)",
       "milestones": "100 / 200 / 300",
@@ -22,23 +15,9 @@
       "active": true
     },
     {
-      "id": "set-piece-goals",
-      "title": "Duran Toptan En Fazla Gol Atma",
-      "milestones": "5 / 10 / 15",
-      "status": "in-progress",
-      "active": true
-    },
-    {
       "id": "clean-sheet-streak",
       "title": "En Fazla Clean Sheet Streak",
       "milestones": "5 / 10 / 20",
-      "status": "in-progress",
-      "active": true
-    },
-    {
-      "id": "keeper-goal",
-      "title": "Kaleciyle Gol Atma",
-      "milestones": "",
       "status": "in-progress",
       "active": true
     },
@@ -54,7 +33,7 @@
       "title": "Ladder'da Top 256",
       "milestones": "",
       "status": "in-progress",
-      "active": false
+      "active": true
     }
   ],
   "guests": [
@@ -119,5 +98,5 @@
       "name": "Efe Uygaç"
     }
   ],
-  "updatedAt": "2026-09-11T19:04:41.130Z"
+  "updatedAt": "2026-09-17T18:55:25.000Z"
 }
