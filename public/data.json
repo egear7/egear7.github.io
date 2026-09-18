@@ -20,7 +20,7 @@
       "active": true,
       "milestoneStates": [
         "completed",
-        "pending",
+        "in-progress",
         "pending"
       ]
     },
@@ -57,5 +57,5 @@
     }
   ],
   "guests": [],
-  "updatedAt": "2026-09-18T17:17:58.208Z"
+  "updatedAt": "2026-09-18T17:21:52.642Z"
 }
