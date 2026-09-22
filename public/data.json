@@ -53,7 +53,7 @@
       "title": "Ladder'da Top 256",
       "milestones": "",
       "status": "in-progress",
-      "active": false
+      "active": true
     }
   ],
   "guests": [
@@ -66,5 +66,5 @@
       "name": "ÖZKAN ÖZTÜRK"
     }
   ],
-  "updatedAt": "2026-09-22T17:47:27.892Z"
+  "updatedAt": "2026-09-22T20:21:22.985Z"
 }
