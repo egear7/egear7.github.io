@@ -58,13 +58,29 @@
   ],
   "guests": [
     {
-      "id": "eece974d-5997-4c47-90b9-f8d714ab9926",
-      "name": "EMENİKE"
+      "id": "0db8eb5c-179c-4d8b-a700-425b50926a1e",
+      "name": "BIG MAGIC"
     },
     {
-      "id": "7d8fdad2-1f54-4236-852f-c930983e04ee",
-      "name": "ÖZKAN ÖZTÜRK"
+      "id": "e8950b0d-3bac-4906-af1b-9f7e6dcdbcbe",
+      "name": "BBeckyG"
+    },
+    {
+      "id": "9926598c-e9bf-4991-9f33-9efd20c27cc0",
+      "name": "ZgocBrayt"
+    },
+    {
+      "id": "e0c8702b-39a7-4d25-82e1-ce63efb69338",
+      "name": "KTZN"
+    },
+    {
+      "id": "0792b39f-96c4-4c5b-ad5e-c59864236bf4",
+      "name": "Şinasi"
+    },
+    {
+      "id": "1d5ae442-5004-4b06-b081-d627f6fbe5b1",
+      "name": "noeldayi"
     }
   ],
-  "updatedAt": "2026-09-22T20:21:22.985Z"
+  "updatedAt": "2026-09-23T18:39:25.986Z"
 }
